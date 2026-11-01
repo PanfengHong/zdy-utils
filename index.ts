@@ -16,3 +16,18 @@ export const isObject = (source: any): boolean => getType(source) === '[object O
  * @param source
  */
 export const isString = (source: any): boolean => getType(source) === '[object String]';
+
+/**
+ * 是否为空
+ * @param {any} source 任意数据
+ * @returns {boolean}
+ */
+export const isEmpty = (source: any): boolean => {
+    if (Array.isArray(source)) return source.length === 0;
+
+    if (isObject(source)) return Object.keys(source).length === 0;
+
+    if (['[object Set]', '[object Map]'].includes(getType(source))) return source.size === 0;
+
+    return [null, undefined, ''].includes(source);
+};
